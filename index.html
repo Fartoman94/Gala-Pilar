@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragancias Exclusivas</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fce7e7;
+        color: #333;
+      }
+      header {
+        position: relative;
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 20px;
+        overflow: hidden;
+      }
+
+      .header-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      .logo {
+        width: 350px;
+        height: 350px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .header-title {
+        font-size: 2em;
+        text-align: center;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        position: relative;
+        z-index: 2;
+        margin-top: 10px;
+      }
+
+      footer {
+        background-color: #34495e;
+        color: white;
+        padding: 1em;
+        text-align: center;
+        margin-top: 2em;
+      }
+
+      .creator-info {
+        margin-bottom: 1em;
+      }
+
+      .contact-button {
+        background-color: #25d366;
+        color: white;
+        padding: 0.5em 1em;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+      }
+
+      .contact-button:hover {
+        background-color: #128c7e;
+      }
+
+      .header-title {
+        font-size: 1.5em;
+      }
+
+      .header-image {
+        width: 100px;
+        height: 60px;
+        object-fit: scroll;
+      }
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2em;
+      }
+      .carousel {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+        margin-bottom: 2em;
+      }
+      .carousel-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+      .carousel-item.active {
+        opacity: 1;
+      }
+      .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+      .productos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2em;
+      }
+      .producto {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5em;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .producto:hover {
+        transform: translateY(-5px);
+      }
+      .quienes-somos {
+        background-color: #ecf0f1;
+        padding: 2em;
+        border-radius: 10px;
+        margin-top: 2em;
+      }
+      .contacto {
+        display: flex;
+        justify-content: center;
+        margin-top: 2em;
+      }
+      .contacto a {
+        text-decoration: none;
+        color: white;
+        padding: 0.8em 1.5em;
+        border-radius: 5px;
+        margin: 0 10px;
+        transition: background-color 0.3s ease;
+      }
+      .whatsapp {
+        background-color: #25d366;
+      }
+      .facebook {
+        background-color: #3b5998;
+      }
+      .instagram {
+        background-color: #c13584;
+      }
+      .contacto a:hover {
+        opacity: 0.9;
+      }
+      .whatsapp-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 100;
+        padding: 15px;
+        text-decoration: none;
+      }
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+      }
+      .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img
+        src="Spring.png"
+        alt="Fondo de fragancias"
+        class="header-background"
+      />
+      <img src="logo.png" alt="Logo Fragancias Exclusivas" class="logo" />
+    </header>
+    <main>
+      <div class="carousel"></div>
+      <div class="productos" id="productos"></div>
+      <div class="quienes-somos">
+        <h2>Quiénes Somos</h2>
+        <p>
+          En Gala Pilar, nos dedicamos a ofrecer las mejores fragancias del
+          mercado. Con años de experiencia y un compromiso inquebrantable con la
+          calidad, nuestro equipo selecciona cuidadosamente cada producto para
+          asegurar que nuestros clientes disfruten de aromas únicos y duraderos.
+        </p>
+      </div>
+      <div class="contacto">
+        <a href="#" class="whatsapp" onclick="contactar('whatsapp')"
+          ><i class="fab fa-whatsapp"></i> WhatsApp</a
+        >
+        <a href="#" class="facebook" onclick="contactar('facebook')"
+          ><i class="fab fa-facebook-f"></i> Facebook</a
+        >
+        <a href="#" class="instagram" onclick="contactar('instagram')"
+          ><i class="fab fa-instagram"></i> Instagram</a
+        >
+      </div>
+    </main>
+    <a href="#" class="whatsapp-float" onclick="contactar('whatsapp')">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="popup" id="popup">
+      <span class="popup-close" onclick="closePopup()">&times;</span>
+      <img
+        src="Post Instagram Animado Página Web en Construcción Gif Pegatina Llamativo Colorido Amarillo.gif"
+        alt="Publicidad"
+        style="width: 100%; max-width: 300px"
+      />
+    </div>
+    <script>
+      const productos = [
+        {
+          nombre: "Bella",
+          descripcion:
+            "Fragancia de la familia olfativa Floral, Frutal gourmand. Se inicia con frutas combinadas pasando a un acorde aldehídico lirio.",
+          precio: "consultar a vendedora ",
+          imagen: "20.jpg",
+        },
+        {
+          nombre: "Textil Rocío",
+          descripcion:
+            "Fresca fragancia floral donde se destacan el típico y delicado olor a ropa limpia, la combinación de notas aldehidicas y la presencia de rosas y flores blancas mezcladas con notas apolvadas y musk determinan la calidad de esta fragancia.",
+          precio: "consultar a vendedora ",
+          imagen: "21.jpg",
+        },
+        {
+          nombre: "Textil Paula",
+          descripcion:
+            "Fusión de notas cítricas de bergamota y limón sobre un corazón amable donde se dan cita la rosa y las orquídeas con un fondo ambarado.",
+          precio: "consultar a vendedora ",
+          imagen: "22.jpg",
+        },
+      ];
+
+      const carouselImages = [
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg",
+        "11.jpg",
+        "12.jpg",
+        "13.jpg",
+        "14.jpg",
+        "15.jpg",
+        "16.jpg",
+        "17.jpg",
+        "18.jpg",
+        "19.jpg",
+        "20.jpg",
+        "21.jpg",
+        "22.jpg",
+        "23.jpg",
+      ];
+
+      function mostrarProductos() {
+        const contenedor = document.getElementById("productos");
+        productos.forEach((producto) => {
+          contenedor.innerHTML += `
+                    <div class="producto">
+                        <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
+                        <h2>${producto.nombre}</h2>
+                        <p>${producto.descripcion}</p>
+                        <p>Precio: $${producto.precio}</p>
+                    </div>
+                `;
+        });
+      }
+
+      function setupCarousel() {
+        const carousel = document.querySelector(".carousel");
+        carouselImages.forEach((image, index) => {
+          carousel.innerHTML += `
+                    <div class="carousel-item ${index === 0 ? "active" : ""}">
+                        <img src="${image}" alt="Fragancia ${index + 1}">
+                    </div>
+                `;
+        });
+
+        let currentSlide = 0;
+        setInterval(() => {
+          const items = document.querySelectorAll(".carousel-item");
+          items[currentSlide].classList.remove("active");
+          currentSlide = (currentSlide + 1) % items.length;
+          items[currentSlide].classList.add("active");
+        }, 5000);
+      }
+
+      function contactar(medio) {
+        let mensaje =
+          "Hola, me gustaría obtener más información sobre sus fragancias.";
+        switch (medio) {
+          case "whatsapp":
+            window.open(
+              `https://wa.me/+5493416729541?text=${encodeURIComponent(
+                mensaje
+              )}`,
+              "_blank"
+            );
+            break;
+          case "facebook":
+            window.open(
+              "https://www.facebook.com/mari.faini?mibextid=rS40aB7S9Ucbxw6v",
+              "_blank"
+            );
+            break;
+          case "instagram":
+            window.open("https://www.instagram.com/fainimari/", "_blank");
+            break;
+        }
+      }
+
+      function showPopup() {
+        document.getElementById("popup").style.display = "block";
+      }
+
+      function closePopup() {
+        document.getElementById("popup").style.display = "none";
+      }
+
+      mostrarProductos();
+      setupCarousel();
+
+      // Mostrar el pop-up después de 5 segundos
+      setTimeout(showPopup, 5000);
+
+      function contactCreator() {
+        let mensaje = "Hola, me interesa tu trabajo en diseño web.";
+        window.open(
+          `https://wa.me/+5493416703302?text=${encodeURIComponent(mensaje)}`,
+          "_blank"
+        );
+      }
+    </script>
+    <footer>
+      <div class="creator-info">
+        <p>Creado por Fabricio Tasca</p>
+        <p>Email: Fabriciotasca1@gmail.com</p>
+        <p>Teléfono: +5493416703302</p>
+      </div>
+      <a href="#" class="contact-button" onclick="contactCreator()">
+        <i class="fab fa-whatsapp"></i> Contactar al Fabricio
+      </a>
+    </footer>
+  </body>
+</html>
